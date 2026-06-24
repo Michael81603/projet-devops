@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block title %}Connexion — EduRessources{% endblock %}
+
+{% block messages %}{% endblock %}
+
+{% block content %}
+<div class="login-wrapper">
+    <div class="login-box">
+        <div class="login-title">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M22 10 12 5 2 10l10 5 10-5Z"></path>
+                <path d="M6 12v5c3 2 9 2 12 0v-5"></path>
+            </svg>
+            EduRessources
+        </div>
+        <div class="login-subtitle">Plateforme de ressources pédagogiques</div>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <form method="POST" action="{{ url_for('login') }}">
+            <div class="form-group">
+                <label for="email">Adresse email</label>
+                <input type="email" id="email" name="email" placeholder="votre@email.mg" required autofocus>
+            </div>
+            <div class="form-group">
+                <label for="password">Mot de passe</label>
+                <input type="password" id="password" name="password" placeholder="••••••••" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">
+                Se connecter
+            </button>
+        </form>
+
+        <div class="demo-accounts">
+            <p class="demo-title">Comptes de démonstration :</p>
+            <div class="demo-list">
+                <div class="demo-account">
+                    <span class="badge-role role-admin">admin</span>
+                    admin@ecole.mg / admin123
+                </div>
+                <div class="demo-account">
+                    <span class="badge-role role-prof">prof</span>
+                    prof@ecole.mg / prof123
+                </div>
+                <div class="demo-account">
+                    <span class="badge-role role-etudiant">étudiant</span>
+                    etudiant@ecole.mg / etudiant123
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

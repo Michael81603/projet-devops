@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block title %}Tableau de bord — EduRessources{% endblock %}
+
+{% block content %}
+<div class="section-page">
+
+    <div class="info-bar">
+        <svg class="icon icon-sm" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="9"></circle>
+            <path d="M12 7v5l3 2"></path>
+        </svg>
+        <span>Connecté le {{ now }} — Bienvenue, {{ current_user.nom }} !</span>
+    </div>
+
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-number">{{ matieres|length }}</div>
+            <div class="stat-label">Matières</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">{{ total_ressources }}</div>
+            <div class="stat-label">Ressources</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">{{ total_users }}</div>
+            <div class="stat-label">Utilisateurs</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number text-success">v{{ version }}</div>
+            <div class="stat-label">Version app</div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-title">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                <path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15Z"></path>
+            </svg>
+            Matières disponibles
+        </div>
+        {% if matieres %}
+        <div class="matieres-grid">
+            {% for matiere in matieres %}
+            <a href="{{ url_for('ressources', matiere_id=matiere.id) }}" class="matiere-card">
+                <h3>{{ matiere.nom }}</h3>
+                <p>{{ matiere.description or 'Aucune description' }}</p>
+                <p class="matiere-count">
+                    {{ matiere.ressources|length }} ressource(s)
+                </p>
+            </a>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p class="empty-state">Aucune matière disponible pour le moment.</p>
+        {% endif %}
+    </div>
+
+</div>
+{% endblock %}
