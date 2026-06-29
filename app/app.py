@@ -10,7 +10,7 @@ app.config['SECRET_KEY'] = 'devops-secret-key-2025'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-APP_VERSION = "1.1.0"
+APP_VERSION = "1.2.0"
 
 db = SQLAlchemy(app)
 login_manager = LoginManager(app)
